@@ -6,8 +6,8 @@ import type { Database } from '@/lib/supabase/types'
  * Cliente Supabase para uso en el SERVIDOR (Server Components, API Routes, Server Actions).
  * Lee las cookies de la request para mantener la sesión del usuario.
  */
-export function createClient() {
-  const cookieStore = cookies()
+export async function createClient() {
+  const cookieStore = await cookies()
 
   return createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

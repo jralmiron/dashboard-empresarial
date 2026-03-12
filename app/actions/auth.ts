@@ -18,7 +18,7 @@ export async function loginAction(
     return { error: result.error.issues[0].message }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const { error } = await supabase.auth.signInWithPassword(result.data)
 
   if (error) {
@@ -29,7 +29,7 @@ export async function loginAction(
 }
 
 export async function logoutAction() {
-  const supabase = createClient()
+  const supabase = await createClient()
   await supabase.auth.signOut()
   redirect('/login')
 }

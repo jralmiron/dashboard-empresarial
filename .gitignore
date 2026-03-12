@@ -89,6 +89,12 @@ credentials/
 service-account*.json
 
 # ============================================================
+# MCP / HERRAMIENTAS LOCALES
+# ============================================================
+.mcp.json
+.claude/
+
+# ============================================================
 # ARCHIVOS DE PLANNING (NO van al repo de producción)
 # ============================================================
 # Comentar estas líneas si quieres versionar los skills

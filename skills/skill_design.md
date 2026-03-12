@@ -1,195 +1,151 @@
-# SKILL — Sistema de Diseño y UI/UX
-## Transversal | Aplicar en todo componente visual
+# SKILL — Diseño y UI/UX
+## Sistema de diseño — Somos Gastronómico
 
 ---
 
-## IDENTIDAD VISUAL
+## IDENTIDAD DE MARCA
 
-### Paleta de Colores
-```css
-/* Colores primarios — personalizar en globals.css */
-:root {
-  --primary: 221 83% 53%;        /* Azul corporativo */
-  --primary-foreground: 0 0% 98%;
+Cliente: **Somos Gastronómico** — https://somosgastronomico.com/
+Estilo: Claro, moderno, cálido. Naranja vibrante como color de acción. Marrón tierra como base oscura.
 
-  --secondary: 210 40% 96%;
-  --accent: 142 71% 45%;         /* Verde éxito */
-  --destructive: 0 84% 60%;      /* Rojo error/eliminar */
-  --warning: 38 92% 50%;         /* Amarillo advertencia */
-}
-```
+---
 
-### Colores de Estado (consistentes en toda la app)
-```typescript
-const ESTADO_COLORES = {
-  // Eventos
-  prospecto:      'bg-gray-100 text-gray-700',
-  en_preparacion: 'bg-yellow-100 text-yellow-700',
-  confirmado:     'bg-blue-100 text-blue-700',
-  en_curso:       'bg-green-100 text-green-700',
-  finalizado:     'bg-purple-100 text-purple-700',
-  cancelado:      'bg-red-100 text-red-700',
+## PALETA DE COLORES (usar siempre estos valores)
 
-  // Prioridades (Scrum)
-  baja:    'bg-gray-100 text-gray-600',
-  media:   'bg-blue-100 text-blue-700',
-  alta:    'bg-orange-100 text-orange-700',
-  urgente: 'bg-red-100 text-red-700',
-}
-```
+### Colores de marca
+| Token Tailwind | HEX | Uso |
+|---|---|---|
+| `bg-primary` / `text-primary` | `#fa811e` | Botones CTA, iconos activos, badges, focus rings |
+| `bg-primary-hover` (hover) | `#ed7411` | Hover de botones, links hover |
+| `bg-brand-light` | `#fef3e8` | Fondos suaves de acento |
+| `bg-secondary` / `bg-sidebar` | `#422626` | Sidebar, footer, fondos oscuros |
+
+### Colores de UI (light mode)
+| Token | HEX | Uso |
+|---|---|---|
+| `bg-background` | `#ffffff` | Fondo principal |
+| `bg-background-subtle` | `#f7f7f7` | Fondo alternativo, zebra tables |
+| `bg-muted` | `#f5f5f5` | Inputs, áreas desactivadas |
+| `text-foreground` | `#2a2c2c` | Texto principal |
+| `text-muted-foreground` | `#626262` | Texto secundario, labels |
+| `text-foreground-subtle` | `#a8a8a8` | Placeholders, hints |
+| `text-accent` | `#0089f7` | Links, badges info |
+| `border-border` | `#e5e5e5` | Bordes de cards, separadores |
+
+### Sidebar
+| Token | Valor | Uso |
+|---|---|---|
+| `bg-sidebar` | `#422626` (marrón tierra) | Fondo sidebar |
+| `text-sidebar-foreground` | `#f2f2f2` | Texto en sidebar |
+| `text-sidebar-accent` | `#fa811e` | Item activo en sidebar |
+
+---
 
 ## TIPOGRAFÍA
 
-```css
-/* Font: Inter (Google Fonts) */
-/* Escala tipográfica */
-.text-xs  { font-size: 0.75rem; }   /* 12px — labels, badges */
-.text-sm  { font-size: 0.875rem; }  /* 14px — body secundario */
-.text-base{ font-size: 1rem; }      /* 16px — body principal */
-.text-lg  { font-size: 1.125rem; }  /* 18px — subtítulos */
-.text-xl  { font-size: 1.25rem; }   /* 20px — títulos sección */
-.text-2xl { font-size: 1.5rem; }    /* 24px — títulos página */
-.text-3xl { font-size: 1.875rem; }  /* 30px — KPIs destacados */
+```
+Font: Alata (Google Fonts) — sans-serif limpia y moderna
+Fallback: Inter, sans-serif
+
+Cargar en app/layout.tsx:
+import { Alata } from 'next/font/google'
+const alata = Alata({ weight: '400', subsets: ['latin'] })
 ```
 
-## COMPONENTES DE DISEÑO
+| Uso | Clase Tailwind |
+|---|---|
+| Título de página | `text-2xl font-semibold text-foreground` |
+| Subtítulo sección | `text-lg font-medium text-foreground` |
+| Cuerpo | `text-sm text-foreground` |
+| Label | `text-xs font-medium text-muted-foreground` |
+| Hint / placeholder | `text-xs text-muted-foreground` |
 
-### KPI Card
-```typescript
-// Anatomía: icono + label + valor + tendencia
-<KPICard
-  icono={<Euro className="h-5 w-5" />}
-  label="Facturación del mes"
-  valor="12.450 €"
-  tendencia="+12% vs mes anterior"
-  tendenciaPositiva={true}
-/>
-```
+---
 
-### Status Badge
-```typescript
-// Pill redondeado con color semántico
-<Badge variant="outline" className={ESTADO_COLORES[estado]}>
-  {ESTADO_LABELS[estado]}
-</Badge>
-```
+## COMPONENTES — GUÍA RÁPIDA
 
-### Empty State
-```typescript
-// Siempre mostrar cuando no hay datos
-function EmptyState({ mensaje, accion }: Props) {
-  return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="rounded-full bg-muted p-6 mb-4">
-        <Icon className="h-8 w-8 text-muted-foreground" />
-      </div>
-      <h3 className="text-lg font-medium">{mensaje}</h3>
-      {accion && <Button className="mt-4">{accion}</Button>}
-    </div>
-  )
-}
-```
-
-## LAYOUT SYSTEM
-
-### Sidebar Navigation
-- Ancho: 240px (expandido) / 60px (colapsado)
-- En móvil: Drawer (slide desde la izquierda)
-- Elemento activo: fondo `bg-primary/10` + borde izquierdo `border-l-2 border-primary`
-- Iconos consistentes de `lucide-react`
-
-### Página estándar
-```typescript
-// Estructura de cada página
-<PageLayout>
-  <PageHeader
-    titulo="Gestión de Eventos"
-    descripcion="Administra todos tus eventos"
-    accion={<Button>+ Nuevo evento</Button>}
-  />
-  <PageContent>
-    {/* Contenido principal */}
-  </PageContent>
-</PageLayout>
-```
-
-### Grids responsivos
-```
-Móvil:    1 columna
-Tablet:   2 columnas
-Desktop:  3-4 columnas según contenido
-```
-
-## FEEDBACK AL USUARIO
-
-### Toasts (notificaciones temporales)
-```typescript
-// Usar sonner para toasts
-import { toast } from 'sonner'
-
-toast.success('Evento creado correctamente')
-toast.error('Error al guardar. Inténtalo de nuevo.')
-toast.loading('Guardando...')
-toast.promise(saveEvento(), {
-  loading: 'Guardando evento...',
-  success: 'Evento guardado',
-  error: 'Error al guardar'
-})
-```
-
-### Estados de botones
-```typescript
-// ✅ Siempre mostrar loading al hacer submit
-<Button disabled={isLoading}>
-  {isLoading ? (
-    <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Guardando...</>
-  ) : 'Guardar'}
+### Botón primario (naranja de marca)
+```tsx
+<Button className="bg-primary hover:bg-primary-hover text-white">
+  Crear evento
 </Button>
 ```
 
-### Confirmaciones destructivas
-```typescript
-// Siempre usar Dialog de confirmación para eliminar
-<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button variant="destructive">Eliminar</Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
-    <AlertDialogDescription>
-      Esta acción no se puede deshacer.
-    </AlertDialogDescription>
-    <AlertDialogAction onClick={handleDelete}>Eliminar</AlertDialogAction>
-    <AlertDialogCancel>Cancelar</AlertDialogCancel>
-  </AlertDialogContent>
-</AlertDialog>
+### Botón secundario
+```tsx
+<Button variant="outline" className="border-border hover:border-primary hover:text-primary">
+  Cancelar
+</Button>
 ```
 
-## ICONOGRAFÍA
-- Librería: `lucide-react` (consistente con shadcn)
-- Tamaños estándar: `h-4 w-4` (inline), `h-5 w-5` (botones), `h-6 w-6` (nav)
-- Siempre con `aria-label` si es el único contenido del botón
-
-## ANIMACIONES
-```typescript
-// ✅ Transiciones sutiles (no distractoras)
-"transition-colors duration-200"   // Hover de botones
-"transition-all duration-300"      // Expansión de paneles
-"animate-spin"                     // Loading spinners
-
-// ✅ Framer Motion para animaciones complejas
-// Solo en: entrada de modales, animaciones de kanban, gráficas
+### Card estándar
+```tsx
+<div className="bg-card border border-border rounded-lg p-6 shadow-sm">
+  {/* contenido */}
+</div>
 ```
 
-## CHECKLIST DE DISEÑO
+### Badge de estado
+```tsx
+<span className="badge-active">Confirmado</span>
+<span className="badge-pending">Borrador</span>
+<span className="badge-cancelled">Cancelado</span>
+```
 
-- [ ] Colores de estado consistentes en toda la app
-- [ ] KPI cards con icono + valor + tendencia
-- [ ] Empty states en listas vacías
-- [ ] Loading states con skeletons
-- [ ] Confirmación para acciones destructivas
-- [ ] Toasts de feedback tras cada acción
-- [ ] Botones con estado loading al hacer submit
-- [ ] Iconos de lucide-react con aria-label
-- [ ] Responsive verificado en 3 breakpoints
-- [ ] Dark mode sin colores hardcodeados
+### KPI card (dashboard home)
+```tsx
+<div className="bg-card border border-border rounded-lg p-6">
+  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Eventos este mes</p>
+  <p className="text-3xl font-bold text-foreground mt-1">24</p>
+  <p className="text-xs text-primary mt-1 flex items-center gap-1">
+    <TrendingUp className="w-3 h-3" /> +12% vs mes anterior
+  </p>
+</div>
+```
+
+### Header de página
+```tsx
+<div className="flex items-center justify-between mb-6">
+  <div>
+    <h1 className="text-2xl font-semibold text-foreground">Eventos</h1>
+    <p className="text-sm text-muted-foreground mt-1">Gestiona todos tus eventos</p>
+  </div>
+  <Button className="bg-primary hover:bg-primary-hover text-white">
+    <Plus className="w-4 h-4 mr-2" /> Nuevo evento
+  </Button>
+</div>
+```
+
+---
+
+## LAYOUT DEL DASHBOARD
+
+```
+┌─────────────────────────────────────────────────┐
+│  SIDEBAR (#422626)  │  TOPBAR (white + border)   │
+│  Logo naranja       │  Breadcrumb + User avatar   │
+│  ─────────────────  ├─────────────────────────── │
+│  Nav item           │                             │
+│  ▶ Nav ACTIVO 🟠    │   CONTENIDO PRINCIPAL       │
+│  Nav item           │   bg: #f7f7f7               │
+│  Nav item           │                             │
+└─────────────────────┴─────────────────────────────┘
+```
+
+---
+
+## REGLAS DE DISEÑO
+
+1. **Naranja = acción** — Solo en botones CTA, estado activo y focus rings
+2. **Nunca naranja en texto largo** — Solo en labels cortos, iconos o highlights
+3. **Sidebar siempre oscuro** (`#422626`) — nunca fondo blanco en sidebar
+4. **Espaciado** — `p-4`/`p-6` para cards, `gap-4` entre elementos
+5. **Sombras suaves** — `shadow-sm` por defecto, `shadow-md` en modales
+6. **Bordes finos** — `border border-border` siempre
+7. **Rounded** — `rounded-lg` cards, `rounded-md` botones/inputs, `rounded-full` badges
+
+---
+
+## OUTPUT ESPERADO
+
+`[SKILL_DESIGN] ✓ aplicado`

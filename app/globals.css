@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   SOMOS GASTRONÓMICO — Sistema de colores
+   Web referencia: https://somosgastronomico.com/
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* --- Fondos --- */
+    --background:         0 0% 100%;          /* #ffffff */
+    --background-subtle:  0 0% 97%;           /* #f7f7f7 */
+    --background-muted:   0 0% 96%;           /* #f5f5f5 */
+
+    /* --- Superficie (cards, panels) --- */
+    --card:               0 0% 100%;
+    --card-foreground:    0 0% 16%;           /* #2a2a2a */
+    --popover:            0 0% 100%;
+    --popover-foreground: 0 0% 16%;
+
+    /* --- Naranja principal (identidad de marca) --- */
+    --primary:            28 95% 55%;         /* #fa811e */
+    --primary-hover:      27 87% 50%;         /* #ed7411 */
+    --primary-foreground: 0 0% 100%;          /* blanco sobre naranja */
+
+    /* --- Secundario (marrón tierra footer) --- */
+    --secondary:          0 24% 20%;          /* #422626 */
+    --secondary-foreground: 0 0% 100%;
+
+    /* --- Muted / grises --- */
+    --muted:              0 0% 96%;           /* #f5f5f5 */
+    --muted-foreground:   0 0% 38%;           /* #626262 */
+
+    /* --- Acento (azul hover / links) --- */
+    --accent:             211 100% 49%;       /* #0089f7 */
+    --accent-foreground:  0 0% 100%;
+
+    /* --- Estados --- */
+    --destructive:        0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success:            142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning:            38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* --- UI --- */
+    --border:             0 0% 90%;           /* #e5e5e5 */
+    --input:              0 0% 90%;
+    --ring:               28 95% 55%;         /* naranja para focus rings */
+
+    /* --- Texto --- */
+    --foreground:         0 0% 16%;           /* #2a2c2c */
+    --foreground-muted:   0 0% 38%;           /* #626262 */
+    --foreground-subtle:  0 0% 66%;           /* #a8a8a8 */
+
+    /* --- Sidebar / Nav --- */
+    --sidebar-bg:         0 24% 20%;          /* #422626 marrón tierra */
+    --sidebar-fg:         0 0% 95%;
+    --sidebar-border:     0 20% 28%;
+    --sidebar-accent:     28 95% 55%;         /* naranja activo */
+    --sidebar-accent-fg:  0 0% 100%;
+    --sidebar-muted:      0 0% 70%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* --- Dark mode --- */
+    --background:         0 20% 8%;           /* casi negro cálido */
+    --background-subtle:  0 18% 12%;
+    --background-muted:   0 16% 15%;
+
+    --card:               0 18% 12%;
+    --card-foreground:    0 0% 95%;
+    --popover:            0 18% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary:            28 95% 55%;         /* naranja igual en dark */
+    --primary-hover:      27 87% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:          0 24% 25%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted:              0 16% 18%;
+    --muted-foreground:   0 0% 60%;
+
+    --accent:             211 100% 55%;
+    --accent-foreground:  0 0% 100%;
+
+    --destructive:        0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border:             0 16% 22%;
+    --input:              0 16% 22%;
+    --ring:               28 95% 55%;
+
+    --foreground:         0 0% 95%;
+    --foreground-muted:   0 0% 65%;
+    --foreground-subtle:  0 0% 45%;
+
+    --sidebar-bg:         0 22% 10%;
+    --sidebar-fg:         0 0% 92%;
+    --sidebar-border:     0 18% 16%;
+    --sidebar-accent:     28 95% 55%;
+    --sidebar-accent-fg:  0 0% 100%;
+    --sidebar-muted:      0 0% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Alata', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Scrollbar personalizada (naranja de marca) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--primary-hover));
+  }
+}
+
+@layer components {
+  /* Gradiente de marca (naranja gastronómico) */
+  .gradient-brand {
+    background: linear-gradient(135deg, #fa811e 0%, #ed7411 100%);
+  }
+
+  /* Header con color de marca */
+  .bg-brand {
+    background-color: #fa811e;
+  }
+
+  /* Sidebar oscuro tierra */
+  .bg-sidebar {
+    background-color: hsl(var(--sidebar-bg));
+  }
+
+  /* Badge de estado */
+  .badge-active {
+    @apply bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full;
+  }
+  .badge-pending {
+    @apply bg-orange-100 text-orange-700 text-xs font-medium px-2 py-0.5 rounded-full;
+  }
+  .badge-cancelled {
+    @apply bg-red-100 text-red-700 text-xs font-medium px-2 py-0.5 rounded-full;
+  }
+}

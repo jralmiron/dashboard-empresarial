@@ -103,3 +103,5 @@ service-account*.json
 # status.md
 # AGENT_PROTOCOL.md
 # informe_arquitectura.pdf
+
+.vercel

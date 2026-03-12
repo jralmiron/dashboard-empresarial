@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { LogOut } from 'lucide-react'
 
 export async function Navbar() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()

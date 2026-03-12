@@ -1,8 +1,10 @@
 import { createCipheriv, createDecipheriv, randomBytes, createHmac } from 'crypto'
 
 const ALGORITHM = 'aes-256-gcm'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const KEY_LENGTH = 32 // bytes para AES-256
 const IV_LENGTH = 16
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TAG_LENGTH = 16
 
 /**

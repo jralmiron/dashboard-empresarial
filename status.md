@@ -10,8 +10,8 @@
 
 | Skill | Módulo | Estado |
 |---|---|---|
-| skill_01_auth.md | Autenticación y Roles | ⬜ Pendiente |
-| skill_02_dashboard.md | Panel de Control Home | ⬜ Pendiente |
+| skill_01_auth.md | Autenticación y Roles | ✅ Completado |
+| skill_02_dashboard.md | Panel de Control Home | 🔄 En progreso |
 | skill_03_eventos.md | Gestión de Eventos | ⬜ Pendiente |
 | skill_04_scrum.md | Tablero Scrum del Equipo | ⬜ Pendiente |
 | skill_14_validacion.md | Zod + React Hook Form | ⬜ Pendiente |
